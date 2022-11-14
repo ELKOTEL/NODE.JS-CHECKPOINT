@@ -1,30 +1,10 @@
-const http = require('http');
-  
-function generatePassword() {
-    var length = 12,
-        charset = 
-"@#$&*0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$&*0123456789abcdefghijklmnopqrstuvwxyz",
-        password = "";
-    for (var i = 0, n = charset.length; i < length; ++i) {
-        password += charset.charAt(Math.floor(Math.random() * n));
-    }
-    return password;
-}
-  
-const server = http.createServer((req, res) => {
-        res.end(`
-        <!doctype html>
-        <html>
-        <body>
-            <h1> ${generatePassword()} </h1>
-            <form action="/">
-                <button>Generate New Password</button>
-            </form>
-        </body>
-        </html>
-      `);
+var generator = require('generate-password');
+
+var password = generator.generate({
+	length: 12,
+	numbers: true,
+    uppercase: true
 });
-  
-server.listen(5000, () => {
-    console.log("lishing on http://localhost:5000");
-});
+
+// 'uEyMTw32v9'
+console.log(password);
